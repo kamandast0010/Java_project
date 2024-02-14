@@ -2,16 +2,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+record AccountDetails(int customerId,String customerName,int customerAccountNumber,double accountBalance,String customerEmail){}
 
 public class Bank {
     private String bankName;
     private String bankLocation;
     private String bankType;
-    protected List<Customers> bankCustomers;
-
-    public Bank() {
-    }
-
+    public Bank(){}
+    protected ArrayList<AccountDetails> bankCustomers;
     public Bank(String bankName, String bankLocation, String bankType) {
         this.bankName = bankName;
         this.bankLocation = bankLocation;
@@ -77,7 +75,7 @@ class Customers extends Bank {
 //        return customerEmail;
 //    }
     public void addCustomer() {
-        this.bankCustomers = new ArrayList<>();
+        bankCustomers = new ArrayList<>();
 
         Scanner scan = new Scanner(System.in);
         Scanner scan2 = new Scanner(System.in);
@@ -119,13 +117,20 @@ class Customers extends Bank {
         }
         customerEmail = scan5.nextLine();
 
-        bankCustomers.add(new Customers(customerId, customerName, customerAccountNumber, accountBalance, customerEmail));
+        bankCustomers.add(new AccountDetails(customerId, customerName, customerAccountNumber, accountBalance, customerEmail));
     }
 
     public void displayCustomer(){
-        for(Customers details:bankCustomers){
-            System.out.println(details.toString());
+        try{
+//            for(AccountDetails details:bankCustomers){
+//                System.out.println(details.toString());
+            for(int i=0;i<bankCustomers.size();i++){
+                System.out.println(bankCustomers.get(i));
+            }
+        }catch (Exception e){
+            System.out.println("No information have been added..");
         }
+
     }
 
     public void depositFunds() {
