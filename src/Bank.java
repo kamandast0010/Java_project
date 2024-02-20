@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 record AccountDetails(int customerId,String customerName,int customerAccountNumber,double accountBalance,String customerEmail){}
 
 public class Bank {
@@ -74,7 +72,7 @@ class Customers extends Bank {
 //    public String getCustomerEmail() {
 //        return customerEmail;
 //    }
-    public void addCustomer() {
+    public AccountDetails addCustomer() {
         bankCustomers = new ArrayList<>();
 
         Scanner scan = new Scanner(System.in);
@@ -84,52 +82,82 @@ class Customers extends Bank {
         Scanner scan5 = new Scanner(System.in);
         Scanner scan6 = new Scanner(System.in);
 
-        System.out.println("------------------------Enter Account Information------------------------");
-        System.out.println("Enter Customer Id: ");
-        try {
-            customerId = scan.nextInt();
-        } catch (Exception e) {
-            System.out.println("wrong value..");
-        }
-        System.out.println("Enter Customer Name: ");
-        try {
-            customerName = scan2.nextLine();
-        } catch (Exception e) {
-            System.out.println("Wrong value");
-        }
-        System.out.println("Enter CustomerAccountNumber: ");
-        try {
-            customerAccountNumber = scan3.nextInt();
-        } catch (Exception e) {
-            System.out.println("wrong value");
-        }
-        System.out.println("Enter AccountBalance: ");
-        try {
-            accountBalance = scan4.nextDouble();
-        } catch (Exception e) {
-            System.out.println("wrong value");
-        }
-        System.out.println("Enter CustomerEmail: ");
-        try {
+        while(true){
+            System.out.println("Type 'exit' to quit registration or any letter and press Enter to continue:  ");
+            String input = scan6.nextLine();
+            if(input.equalsIgnoreCase("exit")){
+                break;
+            }
+            System.out.println("------------------------Enter Account Information------------------------");
+            System.out.println("Enter Customer Id: ");
+            try {
+                customerId = scan.nextInt();
+            } catch (Exception e) {
+                System.out.println("wrong value..");
+            }
+            System.out.println("Enter Customer Name: ");
+            try {
+                customerName = scan2.nextLine();
+            } catch (Exception e) {
+                System.out.println("Wrong value");
+            }
+            System.out.println("Enter CustomerAccountNumber: ");
+            try {
+                customerAccountNumber = scan3.nextInt();
+            } catch (Exception e) {
+                System.out.println("wrong value");
+            }
+            System.out.println("Enter AccountBalance: ");
+            try {
+                accountBalance = scan4.nextDouble();
+            } catch (Exception e) {
+                System.out.println("wrong value");
+            }
+            System.out.println("Enter CustomerEmail: ");
+            try {
 
-        } catch (Exception e) {
-            System.out.println("Wrong value..");
+            } catch (Exception e) {
+                System.out.println("Wrong value..");
+            }
+            customerEmail = scan5.nextLine();
+            bankCustomers.add(new AccountDetails(customerId, customerName, customerAccountNumber, accountBalance, customerEmail));
+            System.out.println("Account creation successful....");
         }
-        customerEmail = scan5.nextLine();
 
-        bankCustomers.add(new AccountDetails(customerId, customerName, customerAccountNumber, accountBalance, customerEmail));
+        return null;
     }
 
-    public void displayCustomer(){
+    public void removeCustomer(){
         try{
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Enter the index to remove: ");
+            int remove = scan.nextInt();
+            bankCustomers.remove(remove);
+            System.out.println("Customer removed successfully...");
+        }catch (Exception e){
+            System.out.println("Empty ArrayList");
+        }
+
+    }
+
+    public void updateCustomer(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter Update index: ");
+        int setCustomer = scan.nextInt();
+        bankCustomers.set(setCustomer,addCustomer());
+    }
+    public void displayCustomer(){
 //            for(AccountDetails details:bankCustomers){
 //                System.out.println(details.toString());
-            for(int i=0;i<bankCustomers.size();i++){
-                System.out.println(bankCustomers.get(i));
+        try{
+            for(AccountDetails customers:bankCustomers){
+                System.out.println("Name: " +customers.customerName() + " Email " + customers.customerEmail() +" Balance " +
+                        customers.accountBalance() + " Account Number " + customers.customerAccountNumber());
             }
         }catch (Exception e){
-            System.out.println("No information have been added..");
+            System.out.println("No Customer Added....4");
         }
+
 
     }
 

@@ -26,3 +26,5 @@ System.out.println("Minimum deposit fund is 20: ....");
         }
 
     }
+
+List<Object> myList = objectsToAdd.stream().collect(Collectors.toList());

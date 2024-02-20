@@ -12,8 +12,10 @@ public class Controller extends Customers {
                 2).Deposit Funds
                 3).Withdraw Funds
                 4).Display Customer Details
-                5.exit
-                )""");
+                5.Remove Customer
+                6.). Update Customer
+                7.). 'exit'1
+                """);
         try {
             option = scan.nextInt();
         }catch(Exception e){
@@ -28,17 +30,26 @@ public class Controller extends Customers {
                     customer1.depositFunds();
                     break;
                 case 3:
+                    System.out.println("---------------------------Withdraw Funds -----------------------------");
                     customer1.withdrawFunds(true);
                     break;
                 case 4:
+                    System.out.println("---------------------------Account Details-----------------------------");
                     customer1.displayCustomer();
                     break;
                 case 5:
+                    System.out.println("---------------------------Remove Customer-----------------------------");
+                    customer1.removeCustomer();
+                    break;
+                case 6:
+                    customer1.updateCustomer();
+                    break;
+                case 7:
                     break;
                 default:
                     System.out.println("invalid entry try again...");
             }
-            if(option == 5){
+            if(option == 7){
                 break;
             }
         }
